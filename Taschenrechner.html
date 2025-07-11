@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online-Taschenrechner</title>
+    <style>
+      body {
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        overflow: hidden;
+      }
+
+      #intermediate {
+        font-size: 1.5rem;
+        text-align: right;
+        height: 2rem;
+      }
+
+      #eingabe {
+        font-size: 2.5rem;
+        text-align: right;
+        height: 3rem;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        gap: 0.2rem;
+      }
+
+      .grid-item {
+        font-size: 2rem;
+        height: 5rem;
+        border-radius: 5px;
+        border: solid 1px #bbb;
+      }
+
+      #list {
+        width: 15rem;
+        font-size: 2rem;
+        padding: 1rem;
+        border-left: solid 2px #ddd;
+        height: 100vh;
+        text-align: right;
+        overflow-y: auto;
+      }
+
+      .wrapper {
+        display: flex;
+      }
+
+      .onebutton {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.2rem;
+      }
+
+      .calculator {
+        flex: 1;
+        padding-right: 1rem;
+      }
+    </style>
+    <script>
+      let currentInput = 0;
+      let previousInput = 0;
+      let operator = "+";
+      let liste = "";
+
+      let isFirstOpperation = true;
+
+      function number(zahl) {
+        if (operator === "=") {
+          previousInput = 0;
+          currentInput = 0;
+          operator = "+";
+          updatePreviousInput("");
+          updateCurrentInput(currentInput);
+        }
+        currentInput = currentInput * 10 + zahl;
+        console.log(currentInput);
+        updateCurrentInput(currentInput);
+      }
+      function add() {
+        performOperator();
+        operator = "+";
+        updatePreviousInput(previousInput + operator);
+      }
+      function subtract() {
+        performOperator();
+        operator = "-";
+        updatePreviousInput(previousInput + operator);
+      }
+      function multiply() {
+        performOperator();
+        operator = "*";
+        updatePreviousInput(previousInput + operator);
+      }
+      function divide() {
+        performOperator();
+        operator = "/";
+        updatePreviousInput(previousInput + operator);
+      }
+
+      function clearCalculator() {
+        currentInput = 0;
+        previousInput = 0;
+        operator = "+";
+        liste = "";
+        updateCurrentInput("");
+        updatePreviousInput("");
+        updateList();
+      }
+      function performOperator() {
+        let currentResult = 0;
+        if (operator === "+") {
+          currentResult = previousInput + currentInput;
+        } else if (operator === "-") {
+          currentResult = previousInput - currentInput;
+        } else if (operator === "*") {
+          currentResult = previousInput * currentInput;
+        } else if (operator === "/") {
+          currentResult = previousInput / currentInput;
+        }
+        if (operator !== "=") {
+          if (isFirstOpperation) {
+            isFirstOpperation = false;
+          } else {
+            let listString =
+              "<p>" +
+              previousInput +
+              operator +
+              currentInput +
+              "=" +
+              currentResult +
+              "</p>";
+            liste = listString + liste;
+            console.log(listString);
+            updateList();
+          }
+        }
+
+        previousInput = currentResult;
+
+        currentInput = 0;
+
+        updateCurrentInput();
+      }
+
+      function enter() {
+        performOperator();
+        operator = "=";
+        isFirstOpperation = true;
+        updatePreviousInput(previousInput + operator);
+        currentInput = previousInput;
+        updateCurrentInput(previousInput);
+      }
+
+      function comma() {
+        if (!currentInput.toString().includes(".")) {
+          currentInput = previousInput + "." + currentInput;
+          updateCurrentInput(currentInput);
+          //bisher gehen nur ganze zahlen zum schreiben, 0,muss ich noch erzeugen
+        }
+      }
+
+      function updateCurrentInput(text) {
+        document.getElementById("eingabe").innerHTML = currentInput;
+      }
+      function updatePreviousInput(text) {
+        document.getElementById("intermediate").innerHTML = text;
+      }
+
+      function updateList() {
+        document.getElementById("list").innerHTML = liste;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="calculator">
+        <div id="intermediate"></div>
+        <div id="eingabe"></div>
+        <div class="grid-container">
+          <button class="grid-item" onclick="number(7)">7</button
+          ><button class="grid-item" onclick="number(8)">8</button
+          ><button class="grid-item" onclick="number(9)">9</button
+          ><button class="grid-item" onclick="divide()">/</button>
+          <button class="grid-item" onclick="number(4)">4</button
+          ><button class="grid-item" onclick="number(5)">5</button
+          ><button class="grid-item" onclick="number(6)">6</button
+          ><button class="grid-item" onclick="multiply()">*</button>
+          <button class="grid-item" onclick="number(1)">1</button
+          ><button class="grid-item" onclick="number(2)">2</button
+          ><button class="grid-item" onclick="number(3)">3</button
+          ><button class="grid-item" onclick="subtract()">-</button>
+
+          <span class="onebutton">
+            <button class="grid-item" onclick="clearCalculator()">CE</button
+            ><button class="grid-item" onclick="comma()">.</button></span
+          >
+
+          <button class="grid-item" onclick="number(0)">0</button
+          ><button class="grid-item" onclick="enter()">=</button
+          ><button class="grid-item" onclick="add()">+</button>
+        </div>
+      </div>
+      <div id="list"></div>
+    </div>
+  </body>
+</html>
