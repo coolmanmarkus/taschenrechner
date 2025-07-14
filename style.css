@@ -1,0 +1,54 @@
+body {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  overflow: hidden;
+}
+
+#intermediate {
+  font-size: 1.5rem;
+  text-align: right;
+  height: 2rem;
+}
+
+#eingabe {
+  font-size: 2.5rem;
+  text-align: right;
+  height: 3rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 0.2rem;
+}
+
+.grid-item {
+  font-size: 2rem;
+  height: 5rem;
+  border-radius: 5px;
+  border: solid 1px #bbb;
+}
+
+#list {
+  width: 15rem;
+  font-size: 2rem;
+  padding: 1rem;
+  border-left: solid 2px #ddd;
+  height: 100vh;
+  text-align: right;
+  overflow-y: auto;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.onebutton {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem;
+}
+
+.calculator {
+  flex: 1;
+  padding-right: 1rem;
+}

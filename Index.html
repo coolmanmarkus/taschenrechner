@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online-Taschenrechner</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="function.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="calculator">
+        <div id="intermediate"></div>
+        <div id="eingabe"></div>
+        <div class="grid-container">
+          <button class="grid-item" onclick="number(7)">7</button
+          ><button class="grid-item" onclick="number(8)">8</button
+          ><button class="grid-item" onclick="number(9)">9</button
+          ><button class="grid-item" onclick="divide()">/</button>
+          <button class="grid-item" onclick="number(4)">4</button
+          ><button class="grid-item" onclick="number(5)">5</button
+          ><button class="grid-item" onclick="number(6)">6</button
+          ><button class="grid-item" onclick="multiply()">*</button>
+          <button class="grid-item" onclick="number(1)">1</button
+          ><button class="grid-item" onclick="number(2)">2</button
+          ><button class="grid-item" onclick="number(3)">3</button
+          ><button class="grid-item" onclick="subtract()">-</button>
+
+          <span class="onebutton">
+            <button class="grid-item" onclick="clearCalculator()">CE</button
+            ><button class="grid-item" onclick="comma()">.</button></span
+          >
+
+          <button class="grid-item" onclick="number(0)">0</button
+          ><button class="grid-item" onclick="enter()">=</button
+          ><button class="grid-item" onclick="add()">+</button>
+        </div>
+      </div>
+      <div id="list"></div>
+    </div>
+  </body>
+</html>
