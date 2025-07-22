@@ -13,7 +13,8 @@ function number(zahl) {
     updatePreviousInput("");
     updateCurrentInput(currentInput);
   }
-  currentInput = currentInput * 10 + zahl;
+  var newNumber = currentInput + "" + zahl;
+  currentInput = Number(newNumber);
   console.log(currentInput);
   updateCurrentInput(currentInput);
 }
@@ -95,9 +96,9 @@ function enter() {
 
 function comma() {
   if (!currentInput.toString().includes(".")) {
-    currentInput = previousInput + "." + currentInput;
+    currentInput = currentInput + ".";
     updateCurrentInput(currentInput);
-    //bisher gehen nur ganze zahlen zum schreiben, 0,muss ich noch erzeugen und 0,0 ebenso
+   
   }
 }
 
